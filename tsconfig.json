@@ -15,6 +15,11 @@
     "jsx": "preserve",
     "incremental": true
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "node_modules/.pnpm/cypress@9.6.1/node_modules/cypress/types/cypress-global-vars.d.ts"
+  ],
   "exclude": ["node_modules"]
 }
