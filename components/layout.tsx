@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
 import Navbar from "./navbar"
+import Link from "next/link";
 
 interface LayoutProps {
   children: ReactNode;
@@ -19,9 +20,9 @@ const Layout = ({ children }: LayoutProps): JSX.Element => {
                 <div className="drawer-side">
                     <label htmlFor="drawer" className="drawer-overlay"></label>
                     <ul className="p-4 overflow-y-auto menu w-80 bg-base-100 text-base-content">
-                        <li><a>Sidebar Item 1</a></li>
-                        <li><a>Sidebar Item 2</a></li>
-
+                        <li><Link href="/identities" >Swarm of Oracle status check</Link></li>
+                        <li>Logs management</li>
+                        <li>SoftwarePassport tasks</li>
                     </ul>
                 </div>
             </div>
