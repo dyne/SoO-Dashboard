@@ -1,46 +1,28 @@
 import {NextPage} from "next";
-import axios from "axios";
 import React from 'react';
 import {useTable} from 'react-table';
+import ServicesMock from "../mocks/services";
 
-const Identities: NextPage = ({identities, error}:any) => {
-
-  const data = identities
+const Services: NextPage = () => {
+   const data = ServicesMock
 
    const columns = React.useMemo(
      () => [
          {
-             Header: 'Base Url',
-             accessor: 'baseUrl',
+             Header: 'Name',
+             accessor: 'name',
          },
          {
-             Header: 'Bitcoin Adress',
-             accessor: 'bitcoin_address',
+             Header: 'Url',
+             accessor: 'url',
          },
          {
-             Header: 'Country',
-             accessor: 'country',
-         },
-         {
-             Header: 'Ip',
-             accessor: 'ip',
-             },
-         {
-             Header: 'Tracker',
-             accessor: 'tracker',
-           },
-         {
-             Header: 'Port Http',
-             accessor: 'port_http',
-           },
-         {
-             Header: 'Port Https',
-             accessor: 'port_https',
-           }
+             Header: 'Region',
+             accessor: 'region',
+         }
      ],
      []
    )
-
    const {
      getTableProps,
      getTableBodyProps,
@@ -48,8 +30,8 @@ const Identities: NextPage = ({identities, error}:any) => {
      rows,
      prepareRow,
    } = useTable({ columns, data })
-if(!error) {
-   return (
+
+    return (
      <table {...getTableProps()} className="table table-zebra w-full">
        <thead>
          {headerGroups.map(headerGroup => (
@@ -81,19 +63,8 @@ if(!error) {
          })}
        </tbody>
      </table>
-   )}
-    return (<><h1>{error}</h1></>)
-
+   )
 }
 
-Identities.getInitialProps = async (ctx) => {
-  try {
-    const res = await axios.get('https://apiroom.net/api/zenswarm/zenswarm-server-get-listOfIdentities')
-    const identities = res?.data.identities;
-    return { identities };
-  } catch (error) {
-    return { error };
-  }
-};
 
-export default Identities
+export default Services
