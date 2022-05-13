@@ -7,6 +7,7 @@ specifiers:
   '@types/react': 18.0.9
   '@types/react-dom': 18.0.3
   autoprefixer: ^10.4.7
+  axios: ^0.27.2
   cypress: ^9.6.1
   cypress-cucumber-preprocessor: ^4.3.1
   daisyui: ^2.14.3
@@ -27,6 +28,7 @@ dependencies:
   '@cypress/react': 5.12.4_qkeff6rmkebek5dcylnxltpwhu
   '@cypress/webpack-dev-server': 1.8.4_ns5syzdqon4ogz7maw7oskeuti
   autoprefixer: 10.4.7_postcss@8.4.13
+  axios: 0.27.2
   cypress: 9.6.1
   cypress-cucumber-preprocessor: 4.3.1
   daisyui: 2.14.3_cr4sis33dk4di3xnobyqnqmrf4
@@ -2441,6 +2443,15 @@ packages:
     engines: {node: '>=4'}
     dev: true
 
+  /axios/0.27.2:
+    resolution: {integrity: sha512-t+yRIyySRTp/wua5xEr+z1q60QmLq8ABsS5O9Me1AsE5dfKqgnCFzwiCZZ/cGNd1lq4/7akDWMxdhVlucjmnOQ==}
+    dependencies:
+      follow-redirects: 1.15.0
+      form-data: 4.0.0
+    transitivePeerDependencies:
+      - debug
+    dev: false
+
   /axobject-query/2.2.0:
     resolution: {integrity: sha512-Td525n+iPOOyUQIeBfcASuG6uJsDOITl7Mds5gFyerkWiX7qhUTdYUBlSgNMyVqtSJqwpt1kXGLdUt6SykLMRA==}
     dev: true
@@ -4607,6 +4618,15 @@ packages:
   /form-data/2.3.3:
     resolution: {integrity: sha512-1lLKB2Mu3aGP1Q/2eCOx0fNbRMe7XdwktwOruhfqqd0rIJWwN4Dh+E3hrPSlDCXnSR7UtZ1N38rVXm+6+MEhJQ==}
     engines: {node: '>= 0.12'}
+    dependencies:
+      asynckit: 0.4.0
+      combined-stream: 1.0.8
+      mime-types: 2.1.35
+    dev: false
+
+  /form-data/4.0.0:
+    resolution: {integrity: sha512-ETEklSGi5t0QMZuiXoA/Q6vcnxcLQP5vdugSpuAyi6SVGi2clPPp+xgEhuMaHC+zGgn31Kd235W35f7Hykkaww==}
+    engines: {node: '>= 6'}
     dependencies:
       asynckit: 0.4.0
       combined-stream: 1.0.8
