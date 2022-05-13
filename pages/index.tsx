@@ -1,4 +1,6 @@
 import type { NextPage } from 'next'
+import Link from "next/link";
+
 
 
 
@@ -13,9 +15,7 @@ const Home: NextPage = () => {
         </div>
       </div>
       <div className="w-full pt-10 mt-10 overflow-x-auto">
-        <ul>
-          <li>node status checker</li>
-        </ul>
+
       </div>
     </section>
   )
