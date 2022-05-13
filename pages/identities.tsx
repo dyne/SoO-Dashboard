@@ -10,33 +10,29 @@ const Identities: NextPage = ({identities, error}:any) => {
    const columns = React.useMemo(
      () => [
          {
-             Header: 'Base Url',
-             accessor: 'baseUrl',
-         },
-         {
-             Header: 'Bitcoin Adress',
-             accessor: 'bitcoin_address',
+             Header: 'Ip',
+             accessor: 'ip',
          },
          {
              Header: 'Country',
              accessor: 'country',
          },
          {
-             Header: 'Ip',
-             accessor: 'ip',
-             },
+             Header: 'Type',
+             accessor: 'type',
+         },
          {
-             Header: 'Tracker',
-             accessor: 'tracker',
+             Header: 'Uid',
+             accessor: 'uid',
+         },
+         {
+             Header: 'Version',
+             accessor: 'version',
            },
          {
-             Header: 'Port Http',
-             accessor: 'port_http',
+             Header: 'PingAPI',
+             accessor: 'pingAPI',
            },
-         {
-             Header: 'Port Https',
-             accessor: 'port_https',
-           }
      ],
      []
    )
