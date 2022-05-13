@@ -11,6 +11,7 @@ export default async function auth(req: NextApiRequest, res: NextApiResponse) {
       username: { label: "Username", type: "text", placeholder: "jsmith" },
       password: {  label: "Password", type: "password" }
     },
+    // @ts-ignore
     authorize(credentials, req) {
       if (credentials?.username === process.env.user && credentials?.password === process.env.password){
         return process.env.user

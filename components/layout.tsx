@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 import Navbar from "./navbar"
 import Link from "next/link";
-import { useSession, signIn, signOut } from "next-auth/react"
+import { useSession } from "next-auth/react"
 
 interface LayoutProps {
   children: ReactNode;

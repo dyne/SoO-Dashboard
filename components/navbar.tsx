@@ -11,7 +11,7 @@ const Navbar = () => {
             </div>
             <div className="flex-1">
                 <Link href="/">
-                    <a className="text-xl normal-case btn btn-ghost">SoO Dashboar</a>
+                    <a className="text-xl normal-case btn btn-ghost">SoO Dashboard</a>
                 </Link>
             </div>
             <LoginBtn/>
