@@ -1,3 +1,6 @@
+import LoginBtn from "./login";
+import Link from "next/link";
+
 const Navbar = () => {
     return (
         <div className="navbar bg-base-100">
@@ -7,8 +10,11 @@ const Navbar = () => {
                 </label>
             </div>
             <div className="flex-1">
-                <a className="text-xl normal-case btn btn-ghost">Software Passport</a>
+                <Link href="/">
+                    <a className="text-xl normal-case btn btn-ghost">SoO Dashboar</a>
+                </Link>
             </div>
+            <LoginBtn/>
         </div>
     )
 }
