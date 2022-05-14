@@ -13,12 +13,11 @@ export default async function auth(req: NextApiRequest, res: NextApiResponse) {
     },
     // @ts-ignore
     authorize(credentials, req) {
-      if (credentials?.username === process.env.user && credentials?.password === process.env.password){
-        return process.env.user
-      }
-      return null
-    }
-  })
-]
+      return ((credentials?.username === process.env.user &&
+          credentials?.password === process.env.password) && process.env.user)
+        }
+      })
+    ]
   })
 }
+

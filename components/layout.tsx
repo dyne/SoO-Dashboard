@@ -12,17 +12,7 @@ interface LayoutProps {
 const Layout = ({ children }: LayoutProps): JSX.Element => {
     const { data: session } = useSession()
     const ServicesBtn = () => {
-      if (session) {
-        return (
-          <>
-           <li><Link href="/services" >Services</Link></li>
-          </>
-        )
-      }
-      return (
-        <>
-        </>
-      )
+      return ( <> {session && <li><Link href="/services" >Services</Link></li>} </> )
     }
 
     return (
