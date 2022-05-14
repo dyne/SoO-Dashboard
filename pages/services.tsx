@@ -4,7 +4,8 @@ import {useTable} from 'react-table';
 import ServicesMock from "../mocks/services";
 
 const Services: NextPage = () => {
-   const data = React.useMemo(()=>ServicesMock,[])
+    const data = React.useMemo(()=>ServicesMock,[])
+
 
    const columns = React.useMemo(
      () => [
