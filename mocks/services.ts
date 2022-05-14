@@ -1,4 +1,4 @@
-const ServicesMock: Array<{name:string, url:string, region:string}> = [
+const ServicesMock: Array<any> = [
   {
     name: "nome1",
     url: "http://12345.12/url1",
