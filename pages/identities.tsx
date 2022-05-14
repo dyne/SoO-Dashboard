@@ -5,9 +5,10 @@ import {useTable} from 'react-table';
 
 const Identities: NextPage = ({identities, error}:any) => {
 
-  const data = identities
 
-   const columns = React.useMemo(
+    const data = identities
+
+    const columns = React.useMemo(
      () => [
          {
              Header: 'Ip',
@@ -16,10 +17,12 @@ const Identities: NextPage = ({identities, error}:any) => {
          {
              Header: 'Country',
              accessor: 'country',
+             Cell: ({ value }:any) => (value !== 'NONE') && <div className="badge badge-lg text-primary">{value}</div>
          },
          {
              Header: 'Type',
              accessor: 'type',
+             Cell: ({ value }) => <div className="badge badge-lg badge-secondary">{value}</div>
          },
          {
              Header: 'Uid',
