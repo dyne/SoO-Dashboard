@@ -2,11 +2,13 @@ import {NextPage} from "next";
 import axios from "axios";
 import React from 'react';
 import {useTable} from 'react-table';
+import useSWR from 'swr';
 
-const Identities: NextPage = ({identities, error}:any) => {
+const Identities: NextPage = ({identities, err}:any) => {
 
+    const { data, error } = useSWR("https://apiroom.net/api/zenswarm/zenswarm-server-get-listOfIdentities")
 
-    const data = identities
+    const tableData = data? data.identities : identities
 
     const columns = React.useMemo(
      () => [
@@ -37,7 +39,7 @@ const Identities: NextPage = ({identities, error}:any) => {
              accessor: 'pingAPI',
            },
      ],
-     []
+     [tableData]
    )
 
    const {
@@ -46,8 +48,8 @@ const Identities: NextPage = ({identities, error}:any) => {
      headerGroups,
      rows,
      prepareRow,
-   } = useTable({ columns, data })
-if(!error) {
+   } = useTable({ columns, data:tableData })
+if(!err && !error) {
    return (
      <table {...getTableProps()} className="table table-zebra w-full">
        <thead>
@@ -81,7 +83,7 @@ if(!error) {
        </tbody>
      </table>
    )}
-    return (<><h1>{error}</h1></>)
+    return (<><h1>{err}</h1></>)
 
 }
 
