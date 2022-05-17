@@ -3,6 +3,8 @@ import axios from "axios";
 import React from 'react';
 import {useTable} from 'react-table';
 import useSWR from 'swr';
+import PingChecker from "../components/PingChecker";
+import IdentityBtn from "../components/IdentityBtn";
 
 const Identities: NextPage = ({identities, err}:any) => {
 
@@ -10,11 +12,17 @@ const Identities: NextPage = ({identities, err}:any) => {
 
     const tableData = data? data.identities : identities
 
-    const columns = React.useMemo(
+    const columns:Array<any> = React.useMemo(
      () => [
+         {
+             Header: '',
+             accessor: 'uid',
+             Cell: (row) => <PingChecker data={row}/>
+         },
          {
              Header: 'Ip',
              accessor: 'ip',
+             Cell: (row) => <IdentityBtn data={row}/>
          },
          {
              Header: 'Country',
@@ -27,16 +35,16 @@ const Identities: NextPage = ({identities, err}:any) => {
              Cell: ({ value }) => <div className="badge badge-lg badge-secondary">{value}</div>
          },
          {
-             Header: 'Uid',
-             accessor: 'uid',
-         },
-         {
              Header: 'Version',
              accessor: 'version',
            },
          {
              Header: 'PingAPI',
              accessor: 'pingAPI',
+           },
+         {
+             Header: 'Http Port',
+             accessor: 'port_http',
            },
      ],
      [tableData]
