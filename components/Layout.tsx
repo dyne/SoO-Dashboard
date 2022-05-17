@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import Navbar from "./navbar"
+import Navbar from "./Navbar"
 import Link from "next/link";
 import { useSession } from "next-auth/react"
 

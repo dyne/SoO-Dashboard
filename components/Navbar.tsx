@@ -1,4 +1,4 @@
-import LoginBtn from "./login";
+import LoginBtn from "./Login";
 import Link from "next/link";
 
 const Navbar = () => {
