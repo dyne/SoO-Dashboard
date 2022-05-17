@@ -54,8 +54,10 @@ if(!err && !error) {
      <table {...getTableProps()} className="table table-zebra w-full">
        <thead>
          {headerGroups.map(headerGroup => (
+             // eslint-disable-next-line react/jsx-key
            <tr {...headerGroup.getHeaderGroupProps()}>
              {headerGroup.headers.map(column => (
+                 // eslint-disable-next-line react/jsx-key
                <th
                  {...column.getHeaderProps()}
                >
@@ -69,6 +71,7 @@ if(!err && !error) {
          {rows.map(row => {
            prepareRow(row)
            return (
+               // eslint-disable-next-line react/jsx-key
              <tr {...row.getRowProps()}>
                {row.cells.map(cell => {
                  return (
