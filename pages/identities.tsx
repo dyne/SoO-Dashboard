@@ -1,111 +1,52 @@
-import {NextPage} from "next";
-import axios from "axios";
+import { NextPage } from "next";
+import Link from "next/link";
 import React from 'react';
-import {useTable} from 'react-table';
 import useSWR from 'swr';
-import PingChecker from "../components/PingChecker";
 import IdentityBtn from "../components/IdentityBtn";
+import PingChecker from "../components/PingChecker";
 
-const Identities: NextPage = ({identities, err}:any) => {
+const Identities: NextPage = () => {
 
-    const { data, error } = useSWR("https://apiroom.net/api/zenswarm/zenswarm-server-get-listOfIdentities")
+    const { data } = useSWR("https://apiroom.net/api/zenswarm/zenswarm-server-get-listOfIdentities")
 
-    const tableData = data? data.identities : identities
-
-    const columns:Array<any> = React.useMemo(
-     () => [
-         {
-             Header: '',
-             accessor: 'uid',
-             Cell: (row) => <PingChecker data={row}/>
-         },
-         {
-             Header: 'Ip',
-             accessor: 'ip',
-             Cell: (row) => <IdentityBtn data={row}/>
-         },
-         {
-             Header: 'Country',
-             accessor: 'country',
-             Cell: ({ value }:any) => (value !== 'NONE') && <div className="badge badge-lg text-primary">{value}</div>
-         },
-         {
-             Header: 'Type',
-             accessor: 'type',
-             Cell: ({ value }) => <div className="badge badge-lg badge-secondary">{value}</div>
-         },
-         {
-             Header: 'Version',
-             accessor: 'version',
-           },
-         {
-             Header: 'PingAPI',
-             accessor: 'pingAPI',
-           },
-         {
-             Header: 'Http Port',
-             accessor: 'port_http',
-           },
-     ],
-     [tableData]
-   )
-
-   const {
-     getTableProps,
-     getTableBodyProps,
-     headerGroups,
-     rows,
-     prepareRow,
-   } = useTable({ columns, data:tableData })
-if(!err && !error) {
-   return (
-     <table {...getTableProps()} className="table table-zebra w-full">
-       <thead>
-         {headerGroups.map(headerGroup => (
-             // eslint-disable-next-line react/jsx-key
-           <tr {...headerGroup.getHeaderGroupProps()}>
-             {headerGroup.headers.map(column => (
-                 // eslint-disable-next-line react/jsx-key
-               <th
-                 {...column.getHeaderProps()}
-               >
-                 {column.render('Header')}
-               </th>
-             ))}
-           </tr>
-         ))}
-       </thead>
-       <tbody {...getTableBodyProps()}>
-         {rows.map(row => {
-           prepareRow(row)
-           return (
-               // eslint-disable-next-line react/jsx-key
-             <tr {...row.getRowProps()}>
-               {row.cells.map(cell => {
-                 return (
-                   <td{...cell.getCellProps()}>
-                     {cell.render('Cell')}
-                   </td>
-                 )
-               })}
-             </tr>
-           )
-         })}
-       </tbody>
-     </table>
-   )}
-    return (<><h1>{err}</h1></>)
-
+    return (data && <>
+        <div className="overflow-x-auto">
+            <table className="table w-full table-zebra hover">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>UID</th>
+                        <th>region</th>
+                        <th>type</th>
+                        <th>version</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {data.identities.map((node: any) => {
+                        return (
+                            <tr key={node.uid}>
+                                <td><PingChecker uid={node.uid} api={node.pingAPI} /></td>
+                                <td>{node.uid}</td>
+                                <td>
+                                    <div className="flex flex-col">
+                                        <p className="font-bold">{node.country}</p>
+                                        <p className="text-xs text-gray-400">{node.region}</p>
+                                    </div>
+                                </td>
+                                <td>{node.type}</td>
+                                <td>{node.version}</td>
+                                <td className="flex flex-col space-y-2">
+                                    <IdentityBtn uid={node.uid} />
+                                    <Link href={`http://${node.uid}/docs`}><a className="btn btn-xs btn-success">openapi</a></Link>
+                                </td>
+                            </tr>
+                        )
+                    })}
+                </tbody>
+            </table>
+        </div>
+    </>)
 }
-
-Identities.getInitialProps = async (ctx) => {
-  try {
-    const res = await axios.get('https://apiroom.net/api/zenswarm/zenswarm-server-get-listOfIdentities')
-    const identities = res?.data.identities;
-    return { identities };
-  } catch (error) {
-    return { error };
-  }
-};
 
 export default Identities
