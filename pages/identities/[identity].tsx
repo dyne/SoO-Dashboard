@@ -4,6 +4,25 @@ import { useRouter } from 'next/router';
 import React from "react";
 import useSWR from "swr";
 
+const Pill = ({ level }: { level: string }) => {
+    const color = {
+        "warn": "bg-yellow-500",
+        "info": "bg-blue-500",
+        "error": "bg-red-500",
+        "debug": "bg-gray-500",
+    }
+    return <span className={`text-xs inline-block px-1 leading-none text-center whitespace-nowrap align-baseline font-bold ${color[level]}`}>{level}</span>
+}
+
+const LogLine = ({ l }: { l: string }) => {
+    try {
+        const line = JSON.parse(l);
+        return (<div className="flex p-2 space-x-2 font-mono">
+            <Pill level={line.level} />
+            <span>{line.message}</span>
+        </div>)
+    } catch (e) { return null }
+}
 
 const Identity: NextPage = () => {
     const uid = useRouter().query.identity
@@ -41,19 +60,12 @@ const Identity: NextPage = () => {
                     </dl>
                 </div>
 
-                <a href={logsUrl} className="btn">logsUrl</a>
 
-                <pre className="overflow-auto h-3/6">
-                    {logs ? JSON.stringify(logs) : 'loading logs'}
-                </pre>
-                <ul>
-                    <li>{data?.identity.uid}</li>
-                    <li>{data?.identity.ip}</li>
-                    <li>{data?.identity.port_http}</li>
-                    <li>{data?.identity.country}</li>
-                    <li>{data?.identity.ecdh_public_key}</li>
-                    <li>{data?.identity.version}</li>
-                </ul>
+                <div className="overflow-scroll text-xs text-gray-200 divide-y divide-slate-600 bg-slate-900 max-h-96">
+                    {logs && logs.split(/\r?\n/).map(l => <LogLine key={l} l={l} />)}
+                </div>
+
+                <a href={logsUrl} className="btn">logsUrl</a>
             </>
             }
         </>
