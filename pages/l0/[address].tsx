@@ -1,29 +1,44 @@
 import { useRouter } from "next/router";
 import useSwr from "swr";
-import { useEffect, useRef, useState } from 'react'
+import React, {ReactNode, useEffect, useRef, useState} from 'react'
+import Link from "next/link";
 
 interface Tx {
     hash: string;
     height: number;
     transaction_ids: string[]
 }
+const Definition = ({ label, value }: { label: string, value: string | ReactNode }) => {
+    return (
+        <>
+            <dt className="font-medium text-gray-500">{label}</dt>
+            <dd className="mt-1 break-all border-b text-accent">{value}</dd>
+            <br />
+        </>
+    )
+}
 
 const TxCard = ({ hash, height, transaction_ids }: Tx) => {
-    // TODO: Ennio make it 💄
     return (<>
-        hash: {hash} <br />
-        height: {height} <br />
-        transaction_ids: <br />{transaction_ids.map(t => (t && <br />))}
+        <div className="card w-fill bg-base-100 shadow-xl">
+            <div className="card-body">
+                <h2 className="card-title">{hash}</h2>
+                <dl>
+                    <Definition label="height" value={height}/>
+                    <Definition label="transaction_ids" value={transaction_ids.map((t, i) => (<ul key={i}><li className="list-decimal">id:  {t}</li></ul>))} />
+                </dl>
+            </div>
+        </div>
     </>)
 };
 
 const NodeL0DetailPage = () => {
     const address = useRouter().query.address;
     const { data: meta } = useSwr(`http://${address}/`);
-    const [transactions, setTransactions] = useState([]);
+    const [transactions, setTransactions] = useState([]as Array<any>);
 
     const [isPaused, setPause] = useState(false);
-    const ws = useRef(null);
+    const ws:any|null = useRef(null);
 
     useEffect(() => {
         if (meta) {
@@ -42,7 +57,7 @@ const NodeL0DetailPage = () => {
     useEffect(() => {
         if (!ws.current) return;
 
-        ws.current.onmessage = e => {
+        ws.current.onmessage = (e:any) => {
             if (isPaused) return;
             const message: Tx = JSON.parse(e.data);
             setTransactions(transactions => [...transactions, message]);

@@ -5,7 +5,7 @@ import React, { useLayoutEffect, useRef, useMemo, ReactNode } from "react";
 import useSWR from "swr";
 
 const Pill = ({ level }: { level: string }) => {
-    const color = {
+    const color:any = {
         "warn": "bg-yellow-500",
         "info": "bg-blue-500",
         "error": "bg-red-500",

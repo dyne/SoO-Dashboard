@@ -4,64 +4,21 @@ import {useTable} from 'react-table';
 import ServicesMock from "../mocks/services";
 
 const Services: NextPage = () => {
-    const data = React.useMemo(()=>ServicesMock,[])
-
-
-   const columns = React.useMemo(
-     () => [
-         {
-             Header: 'Name',
-             accessor: 'name',
-         },
-         {
-             Header: 'Url',
-             accessor: 'url',
-         },
-         {
-             Header: 'Region',
-             accessor: 'region',
-         }
-     ],
-     []
-   )
-   const {
-     getTableProps,
-     getTableBodyProps,
-     headerGroups,
-     rows,
-     prepareRow,
-   } = useTable({ columns, data })
-
     return (
-     <table {...getTableProps()} className="table table-zebra w-full">
+     <table className="table table-zebra w-full">
        <thead>
-         {headerGroups.map(headerGroup => (
-           <tr {...headerGroup.getHeaderGroupProps()}>
-             {headerGroup.headers.map(column => (
-               <th
-                 {...column.getHeaderProps()}
-               >
-                 {column.render('Header')}
-               </th>
-             ))}
+           <tr>
+               <th>name</th>
+               <th>url</th>
+               <th>region</th>
            </tr>
-         ))}
        </thead>
-       <tbody {...getTableBodyProps()}>
-         {rows.map(row => {
-           prepareRow(row)
-           return (
-             <tr {...row.getRowProps()}>
-               {row.cells.map(cell => {
-                 return (
-                   <td{...cell.getCellProps()}>
-                     {cell.render('Cell')}
-                   </td>
-                 )
-               })}
-             </tr>
-           )
-         })}
+       <tbody>
+       {ServicesMock.map((s,i)=> <tr key={i}>
+           <td>{s.name}</td>
+           <td>{s.url}</td>
+           <td>{s.region}</td>
+         </tr> )}
        </tbody>
      </table>
    )
