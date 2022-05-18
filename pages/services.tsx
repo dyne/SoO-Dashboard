@@ -1,6 +1,5 @@
 import {NextPage} from "next";
 import React from 'react';
-import {useTable} from 'react-table';
 import ServicesMock from "../mocks/services";
 
 const Services: NextPage = () => {
