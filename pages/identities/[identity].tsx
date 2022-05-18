@@ -1,7 +1,7 @@
 import { NextPage } from "next";
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React from "react";
+import React, { useLayoutEffect, useRef } from "react";
 import useSWR from "swr";
 
 const Pill = ({ level }: { level: string }) => {
@@ -25,11 +25,19 @@ const LogLine = ({ l }: { l: string }) => {
 }
 
 const Identity: NextPage = () => {
+    const logsRef = useRef<HTMLDivElement>(null);
     const uid = useRouter().query.identity
     const url = `http://${uid}/api/zenswarm-oracle-get-identity`
     const logsUrl = `http://${uid}/logs`
     const { data } = useSWR(url)
     const { data: logs } = useSWR(logsUrl, (url) => fetch(url).then((res) => res.text()))
+
+    useLayoutEffect(() => {
+        if (logsRef.current) {
+            logsRef.current.scroll({ top: logsRef.current.scrollHeight, behavior: 'smooth' });
+        }
+    }, [logs])
+
     return (
         <>
             <h1 className="text-2xl">{uid}</h1>
@@ -60,12 +68,9 @@ const Identity: NextPage = () => {
                     </dl>
                 </div>
 
-
-                <div className="overflow-scroll text-xs text-gray-200 divide-y divide-slate-600 bg-slate-900 max-h-96">
+                <div ref={logsRef} className="overflow-scroll text-xs text-gray-200 divide-y divide-slate-600 bg-slate-900 max-h-96">
                     {logs && logs.split(/\r?\n/).map(l => <LogLine key={l} l={l} />)}
                 </div>
-
-                <a href={logsUrl} className="btn">logsUrl</a>
             </>
             }
         </>
