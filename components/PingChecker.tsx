@@ -1,10 +1,10 @@
 import useSWR from "swr";
 
-const PingChecker = (props: {data:any}) => {
-    const url:string = `http://${props.data.cell.value}/api/zenswarm-oracle-get-identity`
+const PingChecker = ({ uid, api = "" }: { uid: string, api: string }) => {
+    const url: string = `http://${uid}${api.replace('.zen', '')}`
     const { data } = useSWR(url)
 
-    return <>{ data? "✅" : "🚫"}</>
+    return <>{data?.output.includes("I_am_alive!") ? "✅" : "🚫"}</>
 }
 
 export default PingChecker;
