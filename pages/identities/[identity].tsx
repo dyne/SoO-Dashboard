@@ -10,39 +10,41 @@ const Identity: NextPage = () => {
     const url = `http://${uid}/api/zenswarm-oracle-get-identity`
     const logsUrl = `http://${uid}/logs`
     const { data } = useSWR(url)
-    const { data: logs } = useSWR(logsUrl)
+    const { data: logs } = useSWR(logsUrl, (url) => fetch(url).then((res) => res.text()))
     return (
         <>
             <h1 className="text-2xl">{uid}</h1>
             {data && <>
-                <pre>{JSON.stringify(data, null, 2)}</pre>
                 <h2 className="text-xl font-bold">Blockchain addresses and PKs</h2>
                 <div className="border-t border-gray-200">
                     <dl>
-                        <div className="px-4 py-5 bg-gray-50 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                        <div className="px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                             <dt className="text-sm font-medium text-gray-500">ethereum</dt>
                             <dd className="mt-1 text-sm text-accent sm:mt-0 sm:col-span-2"><Link href={`https://www.etherchain.org/account/${data?.identity.ethereum_address}`}><a>{data?.identity.ethereum_address}</a></Link></dd>
                         </div>
-                        <div className="px-4 py-5 bg-gray-50 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                        <div className="px-4 py-5 break-all sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                             <dt className="overflow-auto text-sm font-medium text-gray-500">reflow public key</dt>
                             <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{data?.identity.reflow_public_key}</dd>
                         </div>
-                        <div className="px-4 py-5 bg-gray-50 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                        <div className="px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                             <dt className="text-sm font-medium text-gray-500">ecdh public key</dt>
                             <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{data?.identity.ecdh_public_key}</dd>
                         </div>
-                        <div className="px-4 py-5 bg-gray-50 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                        <div className="px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                             <dt className="text-sm font-medium text-gray-500">ecdh public key</dt>
                             <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{data?.identity.ecdh_public_key}</dd>
                         </div>
-                        <div className="px-4 py-5 bg-gray-50 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                        <div className="px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                             <dt className="text-sm font-medium text-gray-500">bitcoin</dt>
                             <dd className="mt-1 text-sm text-accent sm:mt-0 sm:col-span-2"><Link href={`https://blockchair.com/bitcoin/address/${data?.identity.bitcoin_address}`}><a>{data?.identity.bitcoin_address}</a></Link></dd>
                         </div>
                     </dl>
                 </div>
+
+                <a href={logsUrl} className="btn">logsUrl</a>
+
                 <pre className="overflow-auto h-3/6">
-                    {logs ? logs : 'loading logs'}
+                    {logs ? JSON.stringify(logs) : 'loading logs'}
                 </pre>
                 <ul>
                     <li>{data?.identity.uid}</li>
