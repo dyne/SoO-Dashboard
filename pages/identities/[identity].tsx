@@ -73,18 +73,15 @@ const Identity: NextPage = () => {
                         </div>
                     </dl>
                 </div>
-
-                <div ref={logsRef} className="overflow-scroll text-xs text-gray-200 divide-y divide-slate-600 bg-slate-900 max-h-96">
-                    {logs && logs.split(/\r?\n/).map(l => <LogLine key={l} l={l} />)}
-                </div>
-
                 <a href={logsUrl} className="btn">logsUrl</a>
                 <a href="#my-modal-2" className="btn">logsModal</a>
                 <div className="modal" id="my-modal-2">
                     <div className="modal-box  w-11/12 max-w-5xl">
                         <h3 className="font-bold text-lg">Logs</h3>
                         <div className="mockup-code overflow-auto h-3/6">
-                            {formattedLogs}
+                             <div ref={logsRef} className="overflow-scroll text-xs text-gray-200 divide-y divide-slate-600 bg-slate-900 max-h-96">
+                                {logs && logs.split(/\r?\n/).map(l => <LogLine key={l} l={l} />)}
+                            </div>
                         </div>
                         <div className="modal-action">
                             <a href="#" className="btn">Close</a>
