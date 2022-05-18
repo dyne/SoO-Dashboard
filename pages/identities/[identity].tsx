@@ -8,11 +8,14 @@ import useSWR from "swr";
 const Identity: NextPage = () => {
     const uid = useRouter().query.identity
     const url = `http://${uid}/api/zenswarm-oracle-get-identity`
+    const logsUrl = `http://${uid}/logs`
     const { data } = useSWR(url)
+    const { data: logs } = useSWR(logsUrl)
     return (
         <>
             <h1 className="text-2xl">{uid}</h1>
             {data && <>
+                <pre>{JSON.stringify(data, null, 2)}</pre>
                 <h2 className="text-xl font-bold">Blockchain addresses and PKs</h2>
                 <div className="border-t border-gray-200">
                     <dl>
@@ -38,6 +41,9 @@ const Identity: NextPage = () => {
                         </div>
                     </dl>
                 </div>
+                <pre className="overflow-auto h-3/6">
+                    {logs ? logs : 'loading logs'}
+                </pre>
                 <ul>
                     <li>{data?.identity.uid}</li>
                     <li>{data?.identity.ip}</li>
