@@ -1,7 +1,7 @@
 import { NextPage } from "next";
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React, { useLayoutEffect, useRef } from "react";
+import React, { useLayoutEffect, useRef, useMemo } from "react";
 import useSWR from "swr";
 
 const Pill = ({ level }: { level: string }) => {
@@ -38,6 +38,12 @@ const Identity: NextPage = () => {
         }
     }, [logs])
 
+    const formattedLogs = useMemo(()=>(logs?.split('\n').map((log, i)=> {
+        let row;
+        try {row = JSON.parse(log).message}
+        catch(err){}
+        return <pre key={i} data-prefix="$"><code>{row}</code></pre>
+    })),[logs])
     return (
         <>
             <h1 className="text-2xl">{uid}</h1>
@@ -70,6 +76,20 @@ const Identity: NextPage = () => {
 
                 <div ref={logsRef} className="overflow-scroll text-xs text-gray-200 divide-y divide-slate-600 bg-slate-900 max-h-96">
                     {logs && logs.split(/\r?\n/).map(l => <LogLine key={l} l={l} />)}
+                </div>
+
+                <a href={logsUrl} className="btn">logsUrl</a>
+                <a href="#my-modal-2" className="btn">logsModal</a>
+                <div className="modal" id="my-modal-2">
+                    <div className="modal-box  w-11/12 max-w-5xl">
+                        <h3 className="font-bold text-lg">Logs</h3>
+                        <div className="mockup-code overflow-auto h-3/6">
+                            {formattedLogs}
+                        </div>
+                        <div className="modal-action">
+                            <a href="#" className="btn">Close</a>
+                        </div>
+                    </div>
                 </div>
             </>
             }
