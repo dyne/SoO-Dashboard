@@ -1,7 +1,7 @@
 import { NextPage } from "next";
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React, { useLayoutEffect, useRef, useMemo } from "react";
+import React, { useLayoutEffect, useRef, useMemo, ReactNode } from "react";
 import useSWR from "swr";
 
 const Pill = ({ level }: { level: string }) => {
@@ -24,6 +24,16 @@ const LogLine = ({ l }: { l: string }) => {
     } catch (e) { return null }
 }
 
+const Definition = ({ label, value }: { label: string, value: string | ReactNode }) => {
+    return (
+        <>
+            <dt className="font-medium text-gray-500">{label}</dt>
+            <br />
+            <dd className="mt-1 break-all border-b text-accent">{value}</dd>
+        </>
+    )
+}
+
 const Identity: NextPage = () => {
     const logsRef = useRef<HTMLDivElement>(null);
     const uid = useRouter().query.identity
@@ -38,57 +48,28 @@ const Identity: NextPage = () => {
         }
     }, [logs])
 
-    const formattedLogs = useMemo(()=>(logs?.split('\n').map((log, i)=> {
-        let row;
-        try {row = JSON.parse(log).message}
-        catch(err){}
-        return <pre key={i} data-prefix="$"><code>{row}</code></pre>
-    })),[logs])
     return (
         <>
-            <h1 className="text-2xl">{uid}</h1>
-            {data && <>
-                <h2 className="text-xl font-bold">Blockchain addresses and PKs</h2>
-                <div className="border-t border-gray-600">
-                    <dl>
-                        <div className="px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                            <dt className="text-sm font-medium text-gray-500">ethereum</dt>
-                            <dd className="mt-1 text-sm text-accent sm:mt-0 sm:col-span-2"><Link href={`https://www.etherchain.org/account/${data?.identity.ethereum_address}`}><a>{data?.identity.ethereum_address}</a></Link></dd>
-                        </div>
-                        <div className="px-4 py-5 break-all sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                            <dt className="overflow-auto text-sm font-medium text-gray-500">reflow public key</dt>
-                            <dd className="mt-1 text-sm sm:mt-0 sm:col-span-2">{data?.identity.reflow_public_key}</dd>
-                        </div>
-                        <div className="px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                            <dt className="text-sm font-medium text-gray-500">ecdh public key</dt>
-                            <dd className="mt-1 text-sm sm:mt-0 sm:col-span-2">{data?.identity.ecdh_public_key}</dd>
-                        </div>
-                        <div className="px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                            <dt className="text-sm font-medium text-gray-500">ecdh public key</dt>
-                            <dd className="mt-1 text-sm sm:mt-0 sm:col-span-2">{data?.identity.ecdh_public_key}</dd>
-                        </div>
-                        <div className="px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                            <dt className="text-sm font-medium text-gray-500">bitcoin</dt>
-                            <dd className="mt-1 text-sm text-accent sm:mt-0 sm:col-span-2"><Link href={`https://blockchair.com/bitcoin/address/${data?.identity.bitcoin_address}`}><a>{data?.identity.bitcoin_address}</a></Link></dd>
-                        </div>
-                    </dl>
-                </div>
-                <a href={logsUrl} className="btn">logsUrl</a>
-                <a href="#my-modal-2" className="btn">logsModal</a>
-                <div className="modal" id="my-modal-2">
-                    <div className="modal-box  w-11/12 max-w-5xl">
-                        <h3 className="font-bold text-lg">Logs</h3>
-                        <div className="mockup-code overflow-auto h-3/6">
-                             <div ref={logsRef} className="overflow-scroll text-xs text-gray-200 divide-y divide-slate-600 bg-slate-900 max-h-96">
-                                {logs && logs.split(/\r?\n/).map(l => <LogLine key={l} l={l} />)}
-                            </div>
-                        </div>
-                        <div className="modal-action">
-                            <a href="#" className="btn">Close</a>
-                        </div>
+            <h1 className="w-full my-4 text-4xl font-bold shadow">{uid}</h1>
+            {data && <div className="grid max-h-screen grid-cols-2">
+                <div>
+                    <h3 className="pb-4 text-xl font-bold">Logs</h3>
+                    <div ref={logsRef} className="p-2 overflow-scroll text-xs text-gray-200 divide-y rounded h-96 divide-slate-600 bg-slate-900">
+                        {logs && logs.split(/\r?\n/).map(l => <LogLine key={l} l={l} />)}
+                        {!logs && "Loading logs..."}
                     </div>
                 </div>
-            </>
+
+                <div className="pl-4">
+                    <h2 className="pb-4 text-xl font-bold">Blockchain addresses and PKs</h2>
+                    <dl>
+                        <Definition label="ethereum" value={<Link href={`https://www.etherchain.org/account/${data?.identity.ethereum_address}`}><a>{data?.identity.ethereum_address}</a></Link>} />
+                        <Definition label="ecdh public key" value={data?.identity.ecdh_public_key} />
+                        <Definition label="reflow public key" value={data?.identity.reflow_public_key} />
+                        <Definition label="bitcoin" value={<Link href={`https://blockchair.com/bitcoin/address/${data?.identity.bitcoin_address}`}><a>{data?.identity.bitcoin_address}</a></Link>} />
+                    </dl>
+                </div>
+            </div>
             }
         </>
     )
