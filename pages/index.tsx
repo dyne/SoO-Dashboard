@@ -48,6 +48,16 @@ const Home: NextPage = () => {
             text: 'Monitor active services',
             disabled: !!!session
         },
+        {
+            title: 'Oracles Consensus Post',
+            href: '/oracles_consesus_post',
+            text: 'Send a post to consensus',
+        },
+        {
+            title: 'Verify Notarization on Ethereum',
+            href: '/oracles_consesus_post',
+            text: 'send txid and receive notariztion',
+        },
     ]
 
     return (

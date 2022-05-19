@@ -50,7 +50,7 @@ const OraclesConsensusPost: NextPage = () => {
         <h1 className="pb-4 text-2xl font-bold">{title}</h1>
         <button onClick={()=>setTab(0)} className="btn btn-primary mr-2 mb-2">Oracles Consesus Post</button>
         <button onClick={()=>setTab(1)} className="btn btn-primary mb-2">Verify notarization on Ethereum</button>
-        <div className="grid max-h-screen grid-cols-2">
+        <div className="grid max-h-screen grid-cols-1 md:grid-cols-2">
             {(tab===1) &&  <div>
                     <form onSubmit={verifyNotarization}>
                         <input type="text"
