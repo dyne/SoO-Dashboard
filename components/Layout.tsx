@@ -38,6 +38,7 @@ const Layout = ({ children }: LayoutProps): JSX.Element => {
                             </ul>
                         </li>
                         <li><Link href="">SoftwarePassport tasks</Link></li>
+                        <li><Link href="/oracles_consesus_post">Oracles Consesus Post</Link></li>
                     </ul>
                 </div>
             </div>
