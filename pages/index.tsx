@@ -55,7 +55,7 @@ const Home: NextPage = () => {
         },
         {
             title: 'Verify Notarization on Ethereum',
-            href: '/oracles_consesus_post',
+            href: '/verify_notariztion_on_ethereum',
             text: 'send txid and receive notariztion',
         },
     ]
