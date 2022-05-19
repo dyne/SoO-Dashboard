@@ -22,10 +22,10 @@ const TxCard = ({ hash, height, transaction_ids }: Tx) => {
     return (<>
         <div className="card w-fill bg-base-100 shadow-xl">
             <div className="card-body">
-                <h2 className="card-title">{hash}</h2>
+                <h2 className="card-title break-all">{hash}</h2>
                 <dl>
                     <Definition label="height" value={height}/>
-                    <Definition label="transaction_ids" value={transaction_ids.map((t, i) => (<ul key={i}><li className="list-decimal">id:  {t}</li></ul>))} />
+                    <Definition label="transaction_ids" value={transaction_ids.map((t, i) => (<ul key={i}><li className="">id:  {t}</li></ul>))} />
                 </dl>
             </div>
         </div>
@@ -67,7 +67,9 @@ const NodeL0DetailPage = () => {
 
     return (<>
         <div>
-            {transactions && transactions.map(t => <TxCard {...t} key={t.height} />)}
+            <div className="grid md:grid-cols-2  lg:grid-cols-3 grid-cols-1 gap-2">
+                {transactions && transactions.map(t => <TxCard {...t} key={t.height} />)}
+            </div>
             <button onClick={() => setPause(!isPaused)}>
                 {isPaused ? "Resume" : "Pause"}
             </button>
@@ -75,3 +77,5 @@ const NodeL0DetailPage = () => {
 };
 
 export default NodeL0DetailPage
+
+
