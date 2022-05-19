@@ -69,7 +69,7 @@ const NodeL0DetailPage = () => {
             <div className="grid md:grid-cols-2  lg:grid-cols-3 grid-cols-1 gap-2">
                 {transactions && transactions.map(t => <TxCard {...t} key={t.height} />)}
             </div>
-            <button onClick={() => setPause(!isPaused)}>
+            <button className="btn btn-primary btn-sm" onClick={() => setPause(!isPaused)}>
                 {isPaused ? "Resume" : "Pause"}
             </button>
         </div>    </>)

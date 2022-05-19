@@ -34,22 +34,17 @@ const OraclesConsensusPost: NextPage = () => {
     return (<>
         <h1 className="pb-4 text-2xl font-bold">{title}</h1>
         <div className="grid max-h-screen grid-cols-1 md:grid-cols-2">
-            <div>
-                    <form onSubmit={consesusPost}>
-                        <textarea
-                               placeholder={placeholder}
-                               onChange={(e)=>setPost(e.target.value)}
-                               className="input w-full max-w-xs mb-2 textarea-bordered h-60 textarea"/><br/>
-                        <button type="submit"
-                                className="btn btn-primary">Post!</button>
-                    </form>
-                </div>
-            <div>
-                {response &&<div className="break-all p-4 bg-black text-accent">
-                    {JSON.stringify(response)}
-                </div>}
-            </div>
-
+            <form onSubmit={consesusPost}>
+                <textarea
+                       placeholder={placeholder}
+                       onChange={(e)=>setPost(e.target.value)}
+                       className="input w-4/5 mb-2 textarea-bordered h-60 textarea"/><br/>
+                <button type="submit"
+                        className="btn btn-primary">Post!</button>
+            </form>
+            {response &&<div className="break-all p-4 bg-black text-accent">
+                {JSON.stringify(response)}
+            </div>}
         </div>
 
     </>)
