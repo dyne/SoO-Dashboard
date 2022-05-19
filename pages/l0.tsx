@@ -2,8 +2,7 @@ import { NextPage } from "next";
 import Link from "next/link";
 
 const L0: NextPage = () => {
-    // @ts-ignore
-    const nodes = process.env.NEXT_PUBLIC_L0_NODES.split(" ");
+    const nodes = process.env.NEXT_PUBLIC_L0_NODES!.split(" ");
 
 
     return (<>
