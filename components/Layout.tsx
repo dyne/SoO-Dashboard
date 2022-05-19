@@ -10,6 +10,7 @@ interface LayoutProps {
 
 
 const Layout = ({ children }: LayoutProps): JSX.Element => {
+    const nodes = process.env.NEXT_PUBLIC_L0_NODES!.split(" ");
     const { data: session } = useSession()
     const ServicesBtn = () => {
       return ( <> {session && <li><Link href="/services" >Services</Link></li>} </> )
@@ -26,11 +27,16 @@ const Layout = ({ children }: LayoutProps): JSX.Element => {
                     </div>
                 </div>
                 <div className="drawer-side">
-                    <label htmlFor="drawer" className="drawer-overlay"></label>
-                    <ul className="p-4 overflow-y-auto menu w-80 bg-base-100 text-base-content">
+                    <label htmlFor="drawer" className="drawer-overlay"/>
+                    <ul className="p-4 menu w-80 bg-base-100 text-base-content">
                         <li><Link href="/identities" >Swarm of Oracle status check</Link></li>
                         {ServicesBtn()}
-                        <li><Link href="">Logs management</Link></li>
+                        <li>
+                             <Link href="/l0">L0</Link>
+                            <ul className="menu bg-base-100">
+                                {nodes.map((m, i) => (<li key={i}><Link href={`/l0/${m}`}><a>{m}</a></Link></li>))}
+                            </ul>
+                        </li>
                         <li><Link href="">SoftwarePassport tasks</Link></li>
                     </ul>
                 </div>

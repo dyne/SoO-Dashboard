@@ -1,7 +1,6 @@
 import { useRouter } from "next/router";
 import useSwr from "swr";
 import React, {ReactNode, useEffect, useRef, useState} from 'react'
-import Link from "next/link";
 
 interface Tx {
     hash: string;
