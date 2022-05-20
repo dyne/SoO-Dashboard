@@ -1,7 +1,7 @@
 import { NextPage } from "next";
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React, { useLayoutEffect, useRef, useMemo, ReactNode } from "react";
+import React, { useLayoutEffect, useRef, ReactNode } from "react";
 import useSWR from "swr";
 
 const Pill = ({ level }: { level: string }) => {
@@ -31,6 +31,18 @@ const Definition = ({ label, value }: { label: string, value: string | ReactNode
             <br />
             <dd className="mt-1 break-all border-b text-accent">{value}</dd>
         </>
+
+    )
+}
+const SubscriptionCard = ({ label, value }: { label: string, value: any}) => {
+    const valueKeys = Object.keys(value)
+    return (
+        <div className="card bg-base-100 shadow-xl">
+            <div className="card-body">
+                <h2 className="card-title font-bold">{label}</h2>
+                <ul>{valueKeys.map((v,i)=><li key={i}><span className="font-bold">{v}</span>: <span className="text-grey-500">{value[v]}</span></li>)}</ul>
+            </div>
+        </div>
     )
 }
 
@@ -40,6 +52,8 @@ const Identity: NextPage = () => {
     const url = `http://${uid}/api/zenswarm-oracle-get-identity`
     const logsUrl = `http://${uid}/logs`
     const { data } = useSWR(url)
+    const subscriptions = data?.subscriptions
+    const subscriptionsKeys =Object.keys(subscriptions? subscriptions : {})
     const { data: logs } = useSWR(logsUrl, (url) => fetch(url).then((res) => res.text()))
 
     useLayoutEffect(() => {
@@ -55,7 +69,7 @@ const Identity: NextPage = () => {
                 <div>
                     <h3 className="pb-4 text-xl font-bold">Logs</h3>
                     <div ref={logsRef} className="p-2 overflow-scroll text-xs text-gray-200 divide-y rounded h-96 divide-slate-600 bg-slate-900">
-                        {logs && logs.split(/\r?\n/).map(l => <LogLine key={l} l={l} />)}
+                        {logs && logs.split(/\r?\n/).map((l,i) => <LogLine key={i} l={l} />)}
                         {!logs && "Loading logs..."}
                     </div>
                 </div>
@@ -68,7 +82,13 @@ const Identity: NextPage = () => {
                         <Definition label="reflow public key" value={data?.identity.reflow_public_key} />
                         <Definition label="bitcoin" value={<Link href={`https://blockchair.com/bitcoin/address/${data?.identity.bitcoin_address}`}><a>{data?.identity.bitcoin_address}</a></Link>} />
                     </dl>
+                    {subscriptionsKeys &&<><h2 className="pb-4 text-xl font-bold mt-4">Subscriptions</h2>
+                        <dl>
+                            {subscriptionsKeys && subscriptionsKeys.map((s,i)=> <SubscriptionCard key={i} label={s} value={subscriptions[s]}/>)}
+                        </dl>
+                    </>}
                 </div>
+
             </div>
             }
         </>
