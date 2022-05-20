@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import useSwr from "swr";
-import React, {ReactNode, useEffect, useRef, useState} from 'react'
+import React, { ReactNode, useEffect, useRef, useState } from 'react'
 
 interface Tx {
     hash: string;
@@ -19,11 +19,11 @@ const Definition = ({ label, value }: { label: string, value: string | ReactNode
 
 const TxCard = ({ hash, height, transaction_ids }: Tx) => {
     return (<>
-        <div className="card w-fill bg-base-100 shadow-xl">
+        <div className="shadow-xl card w-fill bg-base-100">
             <div className="card-body">
-                <h2 className="card-title break-all">{hash}</h2>
+                <h2 className="break-all card-title">{hash}</h2>
                 <dl>
-                    <Definition label="height" value={height}/>
+                    <Definition label="height" value={height} />
                     <Definition label="transaction_ids" value={transaction_ids.map((t, i) => (<ul key={i}><li className="">id:  {t}</li></ul>))} />
                 </dl>
             </div>
@@ -34,10 +34,10 @@ const TxCard = ({ hash, height, transaction_ids }: Tx) => {
 const NodeL0DetailPage = () => {
     const address = useRouter().query.address;
     const { data: meta } = useSwr(`http://${address}/`);
-    const [transactions, setTransactions] = useState([]as Array<any>);
+    const [transactions, setTransactions] = useState([] as Array<any>);
 
     const [isPaused, setPause] = useState(false);
-    const ws:any|null = useRef(null);
+    const ws: any | null = useRef(null);
 
     useEffect(() => {
         if (meta) {
@@ -56,7 +56,7 @@ const NodeL0DetailPage = () => {
     useEffect(() => {
         if (!ws.current) return;
 
-        ws.current.onmessage = (e:any) => {
+        ws.current.onmessage = (e: any) => {
             if (isPaused) return;
             const message: Tx = JSON.parse(e.data);
             setTransactions(transactions => [...transactions, message]);
@@ -66,12 +66,13 @@ const NodeL0DetailPage = () => {
 
     return (<>
         <div>
-            <div className="grid md:grid-cols-2  lg:grid-cols-3 grid-cols-1 gap-2">
-                {transactions && transactions.map(t => <TxCard {...t} key={t.height} />)}
-            </div>
-            <button className="btn btn-primary btn-sm" onClick={() => setPause(!isPaused)}>
+            <h1 className="text-3xl font-bold">Listening to blocks generated on {address}</h1>
+            <button className="my-8 btn btn-primary btn-sm" onClick={() => setPause(!isPaused)}>
                 {isPaused ? "Resume" : "Pause"}
             </button>
+            <div className="grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-3">
+                {transactions && transactions.map(t => <TxCard {...t} key={t.height} />)}
+            </div>
         </div>    </>)
 };
 
