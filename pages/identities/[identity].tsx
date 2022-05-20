@@ -14,6 +14,7 @@ const Pill = ({ level }: { level: string }) => {
     return <span className={`text-xs inline-block px-1 leading-none text-center whitespace-nowrap align-baseline font-bold ${color[level]}`}>{level}</span>
 }
 
+
 const LogLine = ({ l }: { l: string }) => {
     try {
         const line = JSON.parse(l);

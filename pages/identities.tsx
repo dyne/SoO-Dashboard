@@ -1,9 +1,10 @@
 import { NextPage } from "next";
-import Link from "next/link";
-import React from 'react';
+import React, {useState} from 'react';
 import useSWR from 'swr';
 import IdentityBtn from "../components/IdentityBtn";
 import PingChecker from "../components/PingChecker";
+import axios from "axios";
+import SubscriptionsCell from "../components/SubscriptionsCell";
 
 const Identities: NextPage = () => {
 
@@ -20,6 +21,7 @@ const Identities: NextPage = () => {
                         <th>type</th>
                         <th>version</th>
                         <th></th>
+                        <th>subscriptions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -39,6 +41,9 @@ const Identities: NextPage = () => {
                                 <td className="flex flex-col space-y-2">
                                     <IdentityBtn uid={node.uid} />
                                     <a href={`http://${node.uid}/docs`} rel="noreferrer" target="_blank" className="btn btn-xs btn-success">openapi</a>
+                                </td>
+                                <td>
+                                    <SubscriptionsCell uid={node.uid} />
                                 </td>
                             </tr>
                         )
