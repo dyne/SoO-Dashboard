@@ -33,8 +33,8 @@ const VerifyNotarizationOnEthereum: NextPage = () => {
                 </form>
             </div>
             <div>
-                {response &&<div className="break-all p-4 bg-black text-accent">
-                    {JSON.stringify(response)}
+                {response &&<div className="p-4 break=all overflow-auto bg-black text-accent whitespace-pre">
+                    {JSON.stringify(response, null, 2)}
                 </div>}
             </div>
         </div>

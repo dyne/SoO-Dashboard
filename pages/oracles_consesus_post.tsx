@@ -6,11 +6,11 @@ import axios from "axios";
 const OraclesConsensusPost: NextPage = () => {
 
     const placeholder = `{
-        post: {
-                id: "01FSKCT2BR8326ZEM6F6C4STWM",
-                recurseLimit: '2'
+        "post": {
+                "id": "01FSKCT2BR8326ZEM6F6C4STWM",
+               "recurseLimit": 2
             },
-            endpoint: "https://reflow-demo.dyne.org/api/json/trace"
+            "endpoint": "https://reflow-demo.dyne.org/api/json/trace"
         }`
 
     const [post, setPost] = useState(placeholder)
@@ -42,7 +42,7 @@ const OraclesConsensusPost: NextPage = () => {
                 <button type="submit"
                     className="btn btn-primary">Post!</button>
             </form>
-            {response && <pre className="p-4 overflow-auto bg-black text-accent">
+            {response && <pre className="p-4 overflow-auto bg-black text-accent whitespace-pre">
                 {JSON.stringify(response, null, 2)}
             </pre>}
         </div>
