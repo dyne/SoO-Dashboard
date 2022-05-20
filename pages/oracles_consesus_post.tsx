@@ -26,7 +26,7 @@ const OraclesConsensusPost: NextPage = () => {
                 'Accept': 'application/json'
             }
         })
-            .then((res) => setResponse(res.data.consensus))
+            .then((res) => setResponse(res.data))
             .catch((error) => setResponse(error));
     }
     const title: string = 'Oracles Consensus Post'
@@ -42,9 +42,9 @@ const OraclesConsensusPost: NextPage = () => {
                 <button type="submit"
                     className="btn btn-primary">Post!</button>
             </form>
-            {response && <div className="p-4 break-all bg-black text-accent">
-                {JSON.stringify(response)}
-            </div>}
+            {response && <pre className="p-4 overflow-auto bg-black text-accent">
+                {JSON.stringify(response, null, 2)}
+            </pre>}
         </div>
 
     </>)
