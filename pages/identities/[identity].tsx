@@ -77,10 +77,16 @@ const Identity: NextPage = () => {
                 <div className="pl-4">
                     <h2 className="pb-4 text-xl font-bold">Blockchain addresses and PKs</h2>
                     <dl>
-                        <Definition label="ethereum" value={<Link href={`https://www.etherchain.org/account/${data?.identity.ethereum_address}`}><a>{data?.identity.ethereum_address}</a></Link>} />
+                        <Definition label="ethereum"
+                                    value={<a href={`https://www.etherchain.org/account/${data?.identity.ethereum_address}`}
+                                    rel="noreferrer"
+                                    target="_blank">{data?.identity.ethereum_address}</a>} />
                         <Definition label="ecdh public key" value={data?.identity.ecdh_public_key} />
                         <Definition label="reflow public key" value={data?.identity.reflow_public_key} />
-                        <Definition label="bitcoin" value={<Link href={`https://blockchair.com/bitcoin/address/${data?.identity.bitcoin_address}`}><a>{data?.identity.bitcoin_address}</a></Link>} />
+                        <Definition label="bitcoin"
+                                    value={<a href={`https://blockchair.com/bitcoin/address/${data?.identity.bitcoin_address}`}
+                                    rel="noreferrer"
+                                    target="_blank">{data?.identity.bitcoin_address}</a>} />
                     </dl>
                     {subscriptionsKeys &&<><h2 className="pb-4 text-xl font-bold mt-4">Subscriptions</h2>
                         <dl>

@@ -38,7 +38,7 @@ const Identities: NextPage = () => {
                                 <td>{node.version}</td>
                                 <td className="flex flex-col space-y-2">
                                     <IdentityBtn uid={node.uid} />
-                                    <a href={`http://${node.uid}/docs`} rel="noreffer" target="_blank" className="btn btn-xs btn-success">openapi</a>
+                                    <a href={`http://${node.uid}/docs`} rel="noreferrer" target="_blank" className="btn btn-xs btn-success">openapi</a>
                                 </td>
                             </tr>
                         )
