@@ -11,7 +11,7 @@ const Pill = ({ level }: { level: string }) => {
         "error": "bg-red-500",
         "debug": "bg-gray-500",
     }
-    return <span className={`text-xs inline-block px-1 leading-none text-center whitespace-nowrap align-baseline font-bold ${color[level]}`}>{level}</span>
+    return <div><span className={`text-xs inline-block px-1 py-1 leading-none text-center whitespace-nowrap align-baseline font-bold ${color[level]}`}>{level}</span></div>
 }
 
 
@@ -95,7 +95,6 @@ const Identity: NextPage = () => {
                         </dl>
                     </>}
                 </div>
-
             </div>
             }
         </>
