@@ -1,0 +1,38 @@
+name: Deploy
+
+on:
+  push:
+    branches: [ main ]
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: SSH Setup
+        run: |
+          mkdir -p ~/.ssh/
+          echo "$SSH_KEY" > ~/.ssh/staging.key
+          chmod 600 ~/.ssh/staging.key
+          cat >>~/.ssh/config <<END
+          Host deploy
+            HostName $SSH_HOST
+            User $SSH_USER
+            IdentityFile ~/.ssh/staging.key
+            IdentitiesOnly yes
+            StrictHostKeyChecking no
+            compression yes
+          END
+        env:
+          SSH_USER: ${{ secrets.SSH_USER }}
+          SSH_KEY: ${{ secrets.SSH_KEY }}
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+
+      - name: Check out the source
+        run: ssh deploy 'cd SoO-Dashboard && git pull'
+
+      - name: Build the source
+        run: ssh deploy 'cd SoO-Dashboard && pnpm build'
+        continue-on-error: true
+
+      - name: Restart the process
+        if: ${{ always() }}
+        run: ssh deploy 'pm2 restart dashboard'
