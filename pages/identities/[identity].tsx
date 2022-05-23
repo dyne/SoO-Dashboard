@@ -1,5 +1,4 @@
 import { NextPage } from "next";
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useLayoutEffect, useRef, ReactNode } from "react";
 import useSWR from "swr";
@@ -35,13 +34,24 @@ const Definition = ({ label, value }: { label: string, value: string | ReactNode
 
     )
 }
-const SubscriptionCard = ({ label, value }: { label: string, value: any}) => {
+const SubscriptionCard = ({ label, value, uid}: { label: string, value: any, uid:string}) => {
+    const planetMint = ['172.104.233.185:26113',
+    '151.236.222.33:26735',
+    '151.236.222.33:28004',
+    '172.104.233.185:25600',
+    'zenswarm.zenroom.org:26729',
+    '151.236.222.33:26735',
+    'zenswarm.zenroom.org:26497'
+    ]
     const valueKeys = Object.keys(value)
     return (
         <div className="card bg-base-100 shadow-xl">
             <div className="card-body">
                 <h2 className="card-title font-bold">{label}</h2>
-                <ul>{valueKeys.map((v,i)=><li key={i}><span className="font-bold">{v}</span>: <span className="text-grey-500">{value[v]}</span></li>)}</ul>
+                <ul>
+                    {valueKeys.map((v,i)=><li key={i}><span className="font-bold">{v}</span>: <span className="text-grey-500">{value[v]}</span></li>)}
+                    <li><span className="font-bold">Notarization to:</span><span className="text-grey-500">{planetMint.includes(uid)? "planetmint": "ethereum" }</span></li>)
+                </ul>
             </div>
         </div>
     )
@@ -91,7 +101,7 @@ const Identity: NextPage = () => {
                     </dl>
                     {subscriptionsKeys &&<><h2 className="pb-4 text-xl font-bold mt-4">Subscriptions</h2>
                         <dl>
-                            {subscriptionsKeys && subscriptionsKeys.map((s,i)=> <SubscriptionCard key={i} label={s} value={subscriptions[s]}/>)}
+                            {subscriptionsKeys && subscriptionsKeys.map((s,i)=> <SubscriptionCard key={i} label={s} uid={String(uid)} value={subscriptions[s]}/>)}
                         </dl>
                     </>}
                 </div>
