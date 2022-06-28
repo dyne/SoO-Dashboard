@@ -1,18 +1,14 @@
-<p align="center">
-  <a href="https://www.dyne.org">
-    <img alt="{project_name}" src="https://via.placeholder.com/150.png?text=LOGO" width="150" />
-  </a>
-</p>
+![Zenswarm](public/Zenswarm.svg)
+
+
 
 <h1 align="center">
-  {project_name}</br>
-  <sub>{tagline}</sub>
+Zenswarm Dashboard
+  </br>
+  <sub>Zenroom based Swarm of Oracles monitoring</sub>
 </h1>
 
 <p align="center">
-  <a href="https://travis-ci.com/DECODEproject/{project_name}">
-    <img src="https://travis-ci.com/DECODEproject/{project_name}.svg?branch=master" alt="Build Status">
-  </a>
   <a href="https://dyne.org">
     <img src="https://img.shields.io/badge/%3C%2F%3E%20with%20%E2%9D%A4%20by-Dyne.org-blue.svg" alt="Dyne.org">
   </a>
@@ -24,10 +20,6 @@
   <a href="#-install">💾 Install</a>
   <span> • </span>
   <a href="#-quick-start">🎮 Quick start</a>
-  <span> • </span>
-  <a href="#-docker">🐋 Docker</a>
-  <span> • </span>
-  <a href="#-api">🐝 API</a>
   <span> • </span>
   <a href="#-configuration">🔧 Configuration</a>
   <span> • </span>
@@ -45,7 +37,18 @@
 </h4>
 
 
-Abstract description like: 🚧 Zenroom is a software in **ALPHA stage** and are part of the [DECODE project](https://decodeproject.eu) about data-ownership and [technological sovereignty](https://www.youtube.com/watch?v=RvBRbwBm_nQ). Our effort is that of improving people's awareness of how their data is processed by algorithms, as well facilitate the work of developers to create along [privacy by design principles](https://decodeproject.eu/publications/privacy-design-strategies-decode-architecture) using algorithms that can be deployed in any situation without any change.
+Zenswarm Dashboard is a simple interface to monitor the <a href="https://github.com/dyne/zenswarm">Zenroom based Swarm of Oracles</a>. You can check swarm 
+of oracles status. 
+* Swarm of Oracles status check:Get all nodes and check if they are running. See details like logs, 
+region,version in which blockchain the node notarizes, in which blockchain the node is subscribed, 
+a link to an Api test's interface
+* L0: listen to the blocks generated on a specific layer 0
+* Software Passport: find licenses in a repository
+* Services: monitor active services
+* Oracles Consensus Post: Post consensus to the Oracles
+* Verify Notarization: Provide the transaction hash to verify the transaction notarization 
+
+
 
 
 <details id="toc">
@@ -53,12 +56,6 @@ Abstract description like: 🚧 Zenroom is a software in **ALPHA stage** and are
 
 * [Install](#-install)
 * [Quick start](#-quick-start)
-* [Docker](#-docker)
-* [API](#-api)
-* [Configuration](#-configuration)
-* [Testing](#-testing)
-* [Troubleshooting & debugging](#-troubleshooting--debugging)
-* [Acknowledgements](#-acknowledgements)
 * [Links](#-links)
 * [Contributing](#-contributing)
 * [License](#-license)
@@ -80,33 +77,6 @@ pnpm run start
 
 
 ***
-## 🐋 Docker
-
-```bash
-docker build -t {project_name} .
-docker run --rm -it {project_name}
-```
-
-**[🔝 back to top](#toc)**
-
-***
-## 🐝 API
-
-**[🔝 back to top](#toc)**
-
-***
-## 🔧 Configuration
-
-**[🔝 back to top](#toc)**
-
-***
-
-## 📋 Testing
-
-**[🔝 back to top](#toc)**
-
-***
-## 🐛 Troubleshooting & debugging
 
 **[🔝 back to top](#toc)**
 
@@ -126,8 +96,7 @@ Special thanks to Mr. W. White for his special contributions.
 ***
 ## 🌐 Links
 
-https://www.somelink.io/
-
+https://github.com/dyne/zenswarm
 https://dyne.org/
 
 **[🔝 back to top](#toc)**
@@ -149,7 +118,7 @@ Please first take a look at the [Dyne.org - Contributor License Agreement](CONTR
 
 ***
 ## 💼 License
-    {project_name} - {tagline}
+    Zenswarm Dashboard - {tagline}
     Copyleft (ɔ) 2021 Dyne.org foundation, Amsterdam
 
     This program is free software: you can redistribute it and/or modify

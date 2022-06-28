@@ -13,7 +13,7 @@ const Navbar = () => {
             </div>
             <div className="flex-1">
                 <Link href="/">
-                    <a className="text-xl normal-case btn btn-ghost">SoO Dashboard</a>
+                    <a><img className="w-78 h-14" src="/Zenswarm.svg"/></a>
                 </Link>
             </div>
             <LoginBtn/>
