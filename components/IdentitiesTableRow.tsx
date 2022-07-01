@@ -10,9 +10,9 @@ const IdentityTableRow = ({ node }: { node: string }) => {
     return (data && <>
         <tr>
                                 <td><PingChecker uid={node} /></td>
-                                <td className="whitespace-normal break-words">
-                                    <div className="tooltip" data-tip={`did:dyne:id:${data.identity.ecdh_public_key}`}>
-                                        <a className="mr-2 bold">did:dyne:id:{data.identity.ecdh_public_key.slice(0,10)}...</a>
+                                <td className="whitespace-normal w-60 break-words">
+                                    <div className="tooltip w-full" data-tip={`did:dyne:id:${data.identity.ecdh_public_key}`}>
+                                        <a className="mr-2 bold">did:dyne:id:{data.identity.ecdh_public_key.slice(0,40)}...</a>
                                     </div>
                                 </td>
                                 <td>
@@ -22,7 +22,6 @@ const IdentityTableRow = ({ node }: { node: string }) => {
                                     </div>
                                 </td>
                                 <td>{data.identity.description}</td>
-                                <td>{data.identity.version}</td>
                                 <td>
                                     <SubscriptionsCell data={data} />
                                 </td>

@@ -17,7 +17,6 @@ const Identities: NextPage = () => {
                         <th>DID</th>
                         <th>region</th>
                         <th>type</th>
-                        <th>version</th>
                         <th>subscriptions</th>
                         <th></th>
                     </tr>
