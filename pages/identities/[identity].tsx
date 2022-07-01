@@ -50,7 +50,7 @@ const SubscriptionCard = ({ label, value, uid}: { label: string, value: any, uid
                 <h2 className="card-title font-bold">{label}</h2>
                 <ul>
                     {valueKeys.map((v,i)=><li key={i}><span className="font-bold">{v}</span>: <span className="text-grey-500">{value[v]}</span></li>)}
-                    <li><span className="font-bold">Notarization to:</span><span className="text-grey-500">{planetMint.includes(uid)? "planetmint": "ethereum" }</span></li>)
+                    <li><span className="font-bold">Notarization to:</span><span className="text-grey-500">{planetMint.includes(uid)? "planetmint": "ethereum" }</span></li>
                 </ul>
             </div>
         </div>

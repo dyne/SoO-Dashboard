@@ -40,7 +40,7 @@ Zenswarm Dashboard
 Zenswarm Dashboard is a simple interface to monitor the <a href="https://github.com/dyne/zenswarm">Zenroom based Swarm of Oracles</a>. You can check swarm 
 of oracles status. 
 * Swarm of Oracles status check:Get all nodes and check if they are running. See details like logs, 
-region,version in which blockchain the node notarizes, in which blockchain the node is subscribed, 
+region,version, in which blockchain the node notarizes, in which blockchain the node is subscribed, 
 a link to an Api test's interface
 * L0: listen to the blocks generated on a specific layer 0
 * Software Passport: find licenses in a repository

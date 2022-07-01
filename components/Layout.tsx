@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 import Navbar from "./Navbar"
 import Link from "next/link";
-import { useSession } from "next-auth/react"
+import {signIn, useSession} from "next-auth/react"
 
 interface LayoutProps {
   children: ReactNode;
@@ -10,13 +10,19 @@ interface LayoutProps {
 
 
 const Layout = ({ children }: LayoutProps): JSX.Element => {
+     const { status } = useSession({
+        required: true,
+        onUnauthenticated() {
+          return signIn()
+        },
+      })
     const nodes = process.env.NEXT_PUBLIC_L0_NODES!.split(" ");
     const { data: session } = useSession()
     const ServicesBtn = () => {
       return ( <> {session && <li><Link href="/services" >Services</Link></li>} </> )
     }
 
-    return (
+    return status&&(
         <>
             <div className="drawer">
                 <input id="drawer" type="checkbox" className="drawer-toggle" />
@@ -37,7 +43,7 @@ const Layout = ({ children }: LayoutProps): JSX.Element => {
                                 {nodes.map((m, i) => (<li key={i}><Link href={`/l0/${m}`}><a>{m}</a></Link></li>))}
                             </ul>
                         </li>
-                        <li><Link href="">SoftwarePassport tasks</Link></li>
+                        <li><Link href="http://softwarepassport.dyne.org:3000">SoftwarePassport tasks</Link></li>
                         <li><Link href="/oracles_consesus_post">Oracles Consesus Post</Link></li>
                         <li><Link href="/verify_notariztion_on_ethereum">Verify notarization on Ethereum</Link></li>
                     </ul>

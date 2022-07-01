@@ -5,6 +5,7 @@ import Layout from '../components/Layout'
 import {SWRConfig} from 'swr'
 
 
+
 function MyApp({Component, pageProps: {session, ...pageProps}}: AppProps) {
     return (<SessionProvider session={session}>
                 <SWRConfig value={{

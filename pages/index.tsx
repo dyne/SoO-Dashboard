@@ -28,6 +28,16 @@ const Home: NextPage = () => {
 
     const homepageData: Array<HomepageData> = [
         {
+            title: 'Oracles',
+            href: '/identities',
+            text: 'Swarm of Oracles Nodes healt and details'
+        },
+        {
+            title: 'Oracles Consensus Post',
+            href: '/oracles_consesus_post',
+            text: 'Send a post to consensus',
+        },
+        {
             title: 'L0',
             href: '/l0',
             text: 'Layer 0 monitoring'
@@ -38,20 +48,10 @@ const Home: NextPage = () => {
             text: ''
         },
         {
-            title: 'Oracles',
-            href: '/identities',
-            text: 'Swarm of Oracles Nodes healt and details'
-        },
-        {
             title: 'Services',
             href: session ? '/services' : '/',
             text: 'Monitor active services',
             disabled: !!!session
-        },
-        {
-            title: 'Oracles Consensus Post',
-            href: '/oracles_consesus_post',
-            text: 'Send a post to consensus',
         },
         {
             title: 'Verify Notarization on Ethereum',

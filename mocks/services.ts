@@ -25,6 +25,5 @@ const ServicesMock: Array<any> = [
     region: "EstEu"
   }
 ];
-console.log(ServicesMock)
 
 export default ServicesMock
