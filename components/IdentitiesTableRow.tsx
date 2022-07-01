@@ -6,10 +6,15 @@ import IdentityBtn from "./IdentityBtn";
 
 const IdentityTableRow = ({ node }: { node: string }) => {
     const { data } = useSWR(`${node}/api/zenswarm-oracle-get-identity`);
+    console.log(data?.identity)
     return (data && <>
         <tr>
-                                <td><PingChecker uid={node} api={'/pingApi/'} /></td>
-                                <td>{node}</td>
+                                <td><PingChecker uid={node} /></td>
+                                <td className="whitespace-normal break-words">
+                                    <div className="tooltip" data-tip={`did:dyne:id:${data.identity.ecdh_public_key}`}>
+                                        <a className="mr-2 bold">did:dyne:id:{data.identity.ecdh_public_key.slice(0,10)}...</a>
+                                    </div>
+                                </td>
                                 <td>
                                     <div className="flex flex-col">
                                         <p className="font-bold">{data.identity.Country}</p>
@@ -23,7 +28,7 @@ const IdentityTableRow = ({ node }: { node: string }) => {
                                 </td>
                                 <td className="flex flex-col space-y-3 py-6">
                                     <IdentityBtn uid={node} />
-                                    <a href={`http://${node}/docs`} rel="noreferrer" target="_blank" className="btn btn-xs btn-success">openapi</a>
+                                    <a href={`${node}/docs`} rel="noreferrer" target="_blank" className="btn btn-xs btn-success">openapi</a>
                                 </td>
                             </tr></>)
 }

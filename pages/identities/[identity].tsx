@@ -60,8 +60,8 @@ const SubscriptionCard = ({ label, value, uid}: { label: string, value: any, uid
 const Identity: NextPage = () => {
     const logsRef = useRef<HTMLDivElement>(null);
     const uid = useRouter().query.identity
-    const url = `http://${uid}/api/zenswarm-oracle-get-identity`
-    const logsUrl = `http://${uid}/logs`
+    const url = `${uid}/api/zenswarm-oracle-get-identity`
+    const logsUrl = `${uid}/logs`
     const { data } = useSWR(url)
     const subscriptions = data?.subscriptions
     const subscriptionsKeys =Object.keys(subscriptions? subscriptions : {})

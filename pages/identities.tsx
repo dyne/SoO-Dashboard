@@ -1,9 +1,6 @@
 import { NextPage } from "next";
 import React, {useState} from 'react';
 import useSWR from 'swr';
-import IdentityBtn from "../components/IdentityBtn";
-import PingChecker from "../components/PingChecker";
-import SubscriptionsCell from "../components/SubscriptionsCell";
 import IdentityTableRow from "../components/IdentitiesTableRow";
 
 
@@ -17,7 +14,7 @@ const Identities: NextPage = () => {
                 <thead>
                     <tr>
                         <th></th>
-                        <th>UID</th>
+                        <th>DID</th>
                         <th>region</th>
                         <th>type</th>
                         <th>version</th>
