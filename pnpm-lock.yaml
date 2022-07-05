@@ -3,6 +3,7 @@ lockfileVersion: 5.4
 specifiers:
   '@cypress/react': ^5.12.4
   '@cypress/webpack-dev-server': ^1.8.4
+  '@heroicons/react': ^1.0.6
   '@types/node': 17.0.32
   '@types/react': 18.0.9
   '@types/react-dom': 18.0.3
@@ -29,6 +30,7 @@ specifiers:
 dependencies:
   '@cypress/react': 5.12.4_qkeff6rmkebek5dcylnxltpwhu
   '@cypress/webpack-dev-server': 1.8.4_ns5syzdqon4ogz7maw7oskeuti
+  '@heroicons/react': 1.0.6_react@18.1.0
   autoprefixer: 10.4.7_postcss@8.4.13
   axios: 0.27.2
   cypress: 9.6.1
@@ -1535,6 +1537,14 @@ packages:
     transitivePeerDependencies:
       - supports-color
     dev: true
+
+  /@heroicons/react/1.0.6_react@18.1.0:
+    resolution: {integrity: sha512-JJCXydOFWMDpCP4q13iEplA503MQO3xLoZiKum+955ZCtHINWnx26CUxVxxFQu/uLb4LW3ge15ZpzIkXKkJ8oQ==}
+    peerDependencies:
+      react: '>= 16'
+    dependencies:
+      react: 18.1.0
+    dev: false
 
   /@humanwhocodes/config-array/0.9.5:
     resolution: {integrity: sha512-ObyMyWxZiCu/yTisA7uzx81s40xR2fD5Cg/2Kq7G02ajkNubJf6BopgDTmDyc3U7sXpNKM8cYOw7s7Tyr+DnCw==}
