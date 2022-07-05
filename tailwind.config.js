@@ -8,7 +8,7 @@ module.exports = {
                 mono: ["'JetBrains Mono', monospace"]
             },
             colors: {
-                primary: '#FCEFDF',
+                primary: '#4F46E5',
             }
         },
     }

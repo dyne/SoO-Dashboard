@@ -14,9 +14,8 @@ const OraclesConsensusPost: NextPage = () => {
         }`
 
     const [post, setPost] = useState(placeholder)
-
-
     const [response, setResponse] = useState(null as any)
+
     function consesusPost(e: any) {
         e.preventDefault()
         const input = { data: { "post": { data: JSON.parse(post) } } }

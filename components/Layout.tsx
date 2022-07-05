@@ -17,10 +17,6 @@ const Layout = ({ children }: LayoutProps): JSX.Element => {
         },
       })
     const nodes = process.env.NEXT_PUBLIC_L0_NODES!.split(" ");
-    const { data: session } = useSession()
-    const ServicesBtn = () => {
-      return ( <> {session && <li><Link href="/services" >Services</Link></li>} </> )
-    }
 
     return status&&(
         <>
@@ -28,15 +24,16 @@ const Layout = ({ children }: LayoutProps): JSX.Element => {
                 <input id="drawer" type="checkbox" className="drawer-toggle" />
                 <div className="drawer-content">
                     <Navbar />
-                    <div className="md:container md:mx-auto">
+                    <div className="md:container md:mx-auto p-8">
                         {children}
                     </div>
                 </div>
                 <div className="drawer-side">
                     <label htmlFor="drawer" className="drawer-overlay"/>
                     <ul className="p-4 menu w-80 bg-base-100 text-base-content">
-                        <li><Link href="/identities" >Swarm of Oracle status check</Link></li>
-                        {ServicesBtn()}
+                        <li><Link href="/identities" ><a className="btn btn-primary btn-xs text-white my-2 pb-6">
+                            Swarm of Oracle status check
+                        </a></Link></li>
                         <li>
                              <Link href="/l0">L0</Link>
                             <ul className="menu bg-base-100">
