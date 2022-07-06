@@ -12,7 +12,11 @@ const IdentityTableRow = ({node}: { node: string }) => {
     const ecdh_public_key = `did:dyne:id:${data?.identity?.ecdh_public_key}`
 
     async function copyTextToClipboard(text: string) {
-        return await navigator.clipboard.writeText(text);
+        if ('clipboard' in navigator) {
+            return await navigator.clipboard.writeText(text);
+        } else {
+            return document.execCommand('copy', true, text);
+        }
     }
 
     const resolveDidData = {
