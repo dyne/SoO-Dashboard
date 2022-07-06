@@ -28,22 +28,22 @@ function Card({title, text, href, disabled = false}: HomepageData) {
 const Home: NextPage = () => {
     const {data: session} = useSession()
     const Oracles = {
-        title: 'Oracles',
+        title: '',
         href: '/identities',
-        text: 'Swarm of Oracles Nodes healt and details',
-        button: 'Online Swarm of Oracles Nodes'
+        text: 'Zenswarm nodes health and details',
+        button: 'Online Zenswarm nodes'
     }
 
     const homepageData: Array<HomepageData> = [
         {
-            title: 'Oracles Consensus Post',
-            href: '/oracles_consesus_post',
-            text: 'Send a post to consensus',
-        },
-        {
             title: 'L0',
             href: '/l0',
             text: 'Layer 0 monitoring'
+        },
+        {
+            title: 'Oracles Consensus Post',
+            href: '/oracles_consesus_post',
+            text: 'Send a post to consensus',
         },
         {
             title: 'Software Passport',
@@ -60,14 +60,13 @@ const Home: NextPage = () => {
     return (
         <section>
             <div
-                className="px-4 py-12 mx-auto max-w-7xl sm:px-6 lg:py-16 lg:px-8 lg:flex lg:items-center lg:justify-between">
+                className="px-4 py-12 mx-auto max-w-7xl sm:px-6 lg:py-16 lg:px-8 lg:flex lg:items-center">
                 <h2 className="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl"><span
-                    className="block">{Oracles.title}</span><span className="block text-indigo-600">{Oracles.text}</span>
+                    className="block">{Oracles.title}</span><span
+                    className="block text-indigo-600">{Oracles.text}</span>
                 </h2>
                 <div className="flex mt-8 lg:mt-0 lg:flex-shrink-0">
-                    <div className="inline-flex rounded-md">
-                    </div>
-                    <div className="inline-flex ml-3 rounded-md shadow">
+                    <div className="inline-flex lg:ml-16 rounded-md shadow">
                         <a href={Oracles.href}
                            className="inline-flex items-center justify-center px-5 py-3 text-base font-medium text-white bg-indigo-600 border border-transparent rounded-md hover:bg-indigo-700">
                             {Oracles.button}

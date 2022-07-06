@@ -48,22 +48,23 @@ const IdentityTableRow = ({node}: { node: string }) => {
     return (data && <>
         <tr>
             <td><PingChecker uid={node}/></td>
-            <td className="whitespace-normal w-60 break-words">
+            <td className="whitespace-normal break-words">
                 <div className="tooltip w-full" data-tip={ecdh_public_key}>
                     <a className="mr-2 bold flex flex-col">
-                        <span>{ecdh_public_key.slice(0, 30)}...</span>
-                        <div className="grid grid-cols-5">
-                            <button className={`btn btn-ghost text-xs col-span-2 ${isCopied && "text-success"}`}
-                                    onClick={handleCopyClick}>
+                        <div className="grid grid-cols-12">
+                            <button
+                                className={`btn btn-ghost text-xs col-span-1 p-0 justify-end hover:bg-transparent ${isCopied && "text-success"}`}
+                                onClick={handleCopyClick}>
                                 {copyIcon}
                             </button>
-                            <button className="btn btn-primary btn-xs mt-3 col-span-3" onClick={didPost}>resolve</button>
+                            <button className="col-span-11" onClick={didPost}>
+                                <span>{ecdh_public_key.slice(0, 61)}...</span></button>
                         </div>
                     </a>
                 </div>
             </td>
             <td>
-                <div className="flex flex-col">
+                <div className="grid grid-col-1">
                     <p className="font-bold">{data.identity.Country}</p>
                     <p className="text-xs text-gray-400">{data.identity.State}</p>
                 </div>
@@ -72,7 +73,7 @@ const IdentityTableRow = ({node}: { node: string }) => {
             <td>
                 <SubscriptionsCell data={data}/>
             </td>
-            <td className="flex flex-col space-y-3 py-6">
+            <td className="flex flex-col space-y-3 py-6 w-36">
                 <IdentityBtn uid={node}/>
                 <a href={`${node}/docs`} rel="noreferrer" target="_blank"
                    className="btn btn-xs btn-success">openapi</a>
