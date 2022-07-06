@@ -39,7 +39,7 @@ const IdentityTableRow = ({node}: { node: string }) => {
                 'Accept': 'application/json'
             }
         })
-            .then((res) => setResolvedDid(res.data['W3C-DID']))
+            .then((res) => setResolvedDid(res.data['W3C-Document']))
             .catch((error) => console.log(error)).finally(()=>console.log(resolvedDid))
     }
 

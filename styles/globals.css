@@ -3,5 +3,5 @@
 @tailwind utilities;
 
 .modal-box {
-    max-width: 1000px;
+    max-width: calc(100vw - 5em);
 }
