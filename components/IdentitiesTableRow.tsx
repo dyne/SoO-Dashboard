@@ -5,11 +5,15 @@ import SubscriptionsCell from "./SubscriptionsCell";
 import IdentityBtn from "./IdentityBtn";
 import {ClipboardCheckIcon, ClipboardCopyIcon} from "@heroicons/react/solid";
 import axios from "axios";
+import Spinner from "./Spinner";
+import DID from "./DID";
 
 const IdentityTableRow = ({node}: { node: string }) => {
-    const {data} = useSWR(`${node}/api/zenswarm-oracle-get-identity`);
+    const {data} = useSWR(`${node}/api/zenswarm-oracle-get-identity`, {refreshInterval :10000});
     const [isCopied, setIsCopied] = useState(false);
+    const [resolvedDid, setResolvedDid] = useState(null);
     const ecdh_public_key = `did:dyne:id:${data?.identity?.ecdh_public_key}`
+    const context = resolvedDid? resolvedDid["@context"] : []
 
     async function copyTextToClipboard(text: string) {
         if ('clipboard' in navigator) {
@@ -28,14 +32,15 @@ const IdentityTableRow = ({node}: { node: string }) => {
 
     function didPost(e: any) {
         e.preventDefault()
+        setResolvedDid(null)
         axios.post('http://did.dyne.org:12000/api/W3C-DID-resolve-did', resolveDidData, {
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json'
             }
         })
-            .then((res) => console.log(res.data))
-            .catch((error) => console.log(error));
+            .then((res) => setResolvedDid(res.data['W3C-DID']))
+            .catch((error) => console.log(error)).finally(()=>console.log(resolvedDid))
     }
 
     const handleCopyClick = () => {
@@ -52,17 +57,28 @@ const IdentityTableRow = ({node}: { node: string }) => {
     return (data && <>
         <tr>
             <td><PingChecker uid={node}/></td>
-            <td className="whitespace-normal break-words">
+            <td className="min-w-30">
                 <div className="tooltip w-full" data-tip={ecdh_public_key}>
                     <a className="mr-2 bold flex flex-col">
-                        <div className="grid grid-cols-12">
+                        <div className="grid grid-cols-12 w-24 md:w-full">
                             <button
-                                className={`btn btn-ghost text-xs col-span-1 p-0 justify-end hover:bg-transparent ${isCopied && "text-success"}`}
+                                className={`btn btn-ghost text-xs col-span-1 p-0 hidden md:block justify-end hover:bg-transparent ${isCopied && "text-success"}`}
                                 onClick={handleCopyClick}>
                                 {copyIcon}
                             </button>
-                            <button className="col-span-11" onClick={didPost}>
-                                <span>{ecdh_public_key.slice(0, 61)}...</span></button>
+                            <label htmlFor="my-modal" className="col-span-11 mt-3 cursor-pointer hidden md:block">
+                                {ecdh_public_key.slice(0, 61)}...</label>
+                            <label htmlFor="my-modal" className="col-span-11  md:hidden mt-3 cursor-pointer w-full btn btn-primary btn-xs">
+                                resolve</label>
+                            <input type="checkbox" id="my-modal" className="modal-toggle" onInput={didPost}/>
+                                <label htmlFor="my-modal" className="modal cursor-pointer">
+
+                                    <label className="modal-box relative w-[512px] text-left" htmlFor="my-modal-4">
+                                        <h1 className="text-4xl bold mb-5">W3C-DID</h1>
+                                        {!resolvedDid && <Spinner/>}
+                                        {resolvedDid&&<DID resolvedDid={resolvedDid}/>}
+                                    </label>
+                                </label>
                         </div>
                     </a>
                 </div>
