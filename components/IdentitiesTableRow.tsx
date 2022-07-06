@@ -73,7 +73,7 @@ const IdentityTableRow = ({node}: { node: string }) => {
                             <input type="checkbox" id="my-modal" className="modal-toggle" onInput={didPost}/>
                                 <label htmlFor="my-modal" className="modal cursor-pointer">
 
-                                    <label className="modal-box relative w-[512px] text-left" htmlFor="my-modal-4">
+                                    <label className="modal-box relative w-screen text-left" htmlFor="my-modal-4">
                                         <h1 className="text-4xl bold mb-5">W3C-DID</h1>
                                         {!resolvedDid && <Spinner/>}
                                         {resolvedDid&&<DID resolvedDid={resolvedDid}/>}

@@ -2,8 +2,8 @@ import React, {ReactNode} from "react";
 import {ArrowSmDownIcon, ArrowSmUpIcon} from "@heroicons/react/solid";
 
 const Definition = ({ label, value }: { label: string, value: string | ReactNode }) => {
-    const [isOpen, setIsOpen] = React.useState(false);
-    const arrowIcon = isOpen ? <ArrowSmUpIcon className="w-5 h-5 float-left mt-1"/> : <ArrowSmDownIcon className="w-5 h-5 float-left mt-1"/>
+    const [isOpen, setIsOpen] = React.useState(true);
+    const arrowIcon = isOpen ? <ArrowSmDownIcon className="w-5 h-5 float-left mt-1"/> : <ArrowSmUpIcon className="w-5 h-5 float-left mt-1"/>
     const ddHidden = !isOpen ? "hidden" : "";
     return (
         <>
