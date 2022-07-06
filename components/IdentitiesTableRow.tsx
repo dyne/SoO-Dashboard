@@ -39,7 +39,7 @@ const IdentityTableRow = ({node}: { node: string }) => {
                 'Accept': 'application/json'
             }
         })
-            .then((res) => setResolvedDid(res.data['W3C-Document']))
+            .then((res) => setResolvedDid(res.data['W3C-DID']))
             .catch((error) => console.log(error)).finally(()=>console.log(resolvedDid))
     }
 
@@ -74,7 +74,7 @@ const IdentityTableRow = ({node}: { node: string }) => {
                                 <label htmlFor="my-modal" className="modal cursor-pointer">
 
                                     <label className="modal-box relative w-screen text-left" htmlFor="my-modal-4">
-                                        <h1 className="text-4xl bold mb-5">W3C-DID</h1>
+                                        <h1 className="text-4xl bold mb-5">W3C-Document</h1>
                                         {!resolvedDid && <Spinner/>}
                                         {resolvedDid&&<DID resolvedDid={resolvedDid}/>}
                                     </label>
