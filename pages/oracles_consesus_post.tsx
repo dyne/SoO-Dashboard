@@ -31,6 +31,7 @@ const OraclesConsensusPost: NextPage = () => {
     const [response, setResponse] = useState(null as any)
 
     function consesusPost(e: any) {
+        setResponse(<Spinner/>)
         e.preventDefault()
         const input = JSON.parse(post)
         axios.post(endpoint, input, {
@@ -39,18 +40,18 @@ const OraclesConsensusPost: NextPage = () => {
                 'Accept': 'application/json'
             }
         })
-            .then((res) => setResponse(res.data))
+            .then((res) => setResponse(JSON.stringify(res.data, null, 2)))
             .catch((error) => setResponse(error));
     }
 
     const title: string = 'Oracles Consensus Post'
 
     return (<>
-        <h1 className="pb-4 text-2xl font-bold">{title}</h1>
+        <h1 className="pb-4 text-2xl font-bold h-full">{title}</h1>
         {!data && <Spinner/>}
-        {data&&<div className="grid grid-cols-1 md:grid-cols-12 gap-3">
+        {data&&<div className="grid grid-cols-1 grid-rows-1 md:grid-cols-12 gap-3">
             <div className="md:col-span-7">
-                <form className="grid grid-cols-1" onSubmit={consesusPost}>
+                <form className="grid grid-cols-1 h-[33rem]" onSubmit={consesusPost}>
                 <label className="font-bold">select zenswarm node:</label>
                 <select className="select select-bordered my-2" onChange={((e: any) => handleSelect(e))}>
                     {data && data['W3C-DIDs_uid_list']?.map((n: string) =>
@@ -71,9 +72,10 @@ const OraclesConsensusPost: NextPage = () => {
             </form>
             </div>
 
-            {response && <pre className="p-4 overflow-auto bg-black text-accent whitespace-pre md:col-span-5">
-                {JSON.stringify(response, null, 2)}
-            </pre>}
+            {response && <div className="overflow-scroll md:col-span-5 h-[33rem]">
+                <pre className="p-4 bg-black text-accent whitespace-pre min-h-full place-content-center grid">
+                {response}
+            </pre></div>}
         </div>}
 
     </>)
