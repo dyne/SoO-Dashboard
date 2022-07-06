@@ -58,7 +58,7 @@ const IdentityTableRow = ({node}: { node: string }) => {
         <tr>
             <td><PingChecker uid={node}/></td>
             <td className="min-w-30">
-                <div className="tooltip w-full" data-tip={ecdh_public_key}>
+                <div className="tooltip w-full h-full whitespace-normal break-words" data-tip={ecdh_public_key}>
                     <a className="mr-2 bold flex flex-col">
                         <div className="grid grid-cols-12 w-24 md:w-full">
                             <button
@@ -74,7 +74,7 @@ const IdentityTableRow = ({node}: { node: string }) => {
                                 <label htmlFor="my-modal" className="modal cursor-pointer">
 
                                     <label className="modal-box relative w-screen text-left" htmlFor="my-modal-4">
-                                        <h1 className="text-4xl bold mb-5">W3C-Document</h1>
+                                        <h1 className="text-4xl bold mb-5">W3C-DID Document</h1>
                                         {!resolvedDid && <Spinner/>}
                                         {resolvedDid&&<DID resolvedDid={resolvedDid}/>}
                                     </label>
