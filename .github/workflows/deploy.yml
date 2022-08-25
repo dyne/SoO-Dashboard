@@ -37,4 +37,4 @@ jobs:
 
       - name: Restart the process
         if: ${{ always() }}
-        run: ssh deploy 'pm2 restart dashboard'
+        run: ssh deploy 'pm2 restart zenswarm-gui'
