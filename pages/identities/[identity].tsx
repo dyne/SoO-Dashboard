@@ -70,7 +70,7 @@ const Identity: NextPage = () => {
     const subscriptionsKeys = Object.keys(subscriptions ? subscriptions : {})
     const eventSubscriptionsKeys = Object.keys(eventSubscriptions ? eventSubscriptions : {})
     const {data: logs} = useSWR(logsUrl, (url) => fetch(url).then((res) => res.text()))
-    const ecdh_public_key = `did:dyne:id:${data?.identity?.ecdh_public_key}`
+    const eddsa_public_key = `did:dyne:id:${data?.identity?.eddsa_public_key}`
 
 
     useLayoutEffect(() => {
@@ -81,7 +81,7 @@ const Identity: NextPage = () => {
 
     const resolveDidData = {
         "data": {
-            "id": ecdh_public_key
+            "id": eddsa_public_key
         },
         "keys": {}
     }
@@ -104,7 +104,7 @@ const Identity: NextPage = () => {
         <>
             <h1 className="w-full my-4 text-4xl font-bold shadow mb-0">{uid}</h1>
             <label htmlFor="my-modal" className="col-span-11 mb-3 cursor-pointer hidden md:block text-gray-500">
-                {ecdh_public_key}</label>
+                {eddsa_public_key}</label>
             <label htmlFor="my-modal"
                    className="col-span-11  md:hidden mt-3 cursor-pointer w-full btn btn-primary btn-xs">
                 resolve</label>
@@ -130,12 +130,13 @@ const Identity: NextPage = () => {
                 <div className="pl-4">
                     <h2 className="pb-4 text-xl font-bold">Blockchain addresses and PKs</h2>
                     <dl>
+                        <Definition label="eddsa public key" value={data?.identity.eddsa_public_key}/>
                         <Definition label="ethereum"
                                     value={<a
                                         href={`http://test.fabchain.net:8000/#/address/${data?.identity.ethereum_address}`}
                                         rel="noreferrer"
                                         target="_blank">{data?.identity.ethereum_address}</a>}/>
-                        <Definition label="ecdh public key" value={ecdh_public_key}/>
+                        <Definition label="ecdh public key" value={data?.identity.ecdh_public_key}/>
                         <Definition label="reflow public key" value={data?.identity.reflow_public_key}/>
                         <Definition label="bitcoin"
                                     value={<a
