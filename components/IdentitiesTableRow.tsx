@@ -12,7 +12,7 @@ const IdentityTableRow = ({node}: { node: string }) => {
     const {data} = useSWR(`${node}/api/zenswarm-oracle-get-identity`, {refreshInterval :10000});
     const [isCopied, setIsCopied] = useState(false);
     const [resolvedDid, setResolvedDid] = useState(null);
-    const ecdh_public_key = `did:dyne:id:${data?.identity?.ecdh_public_key}`
+    const eddsa_public_key = `did:dyne:id:${data?.identity?.eddsa_public_key}`
     const context = resolvedDid? resolvedDid["@context"] : []
 
     async function copyTextToClipboard(text: string) {
@@ -25,7 +25,7 @@ const IdentityTableRow = ({node}: { node: string }) => {
 
     const resolveDidData = {
         "data": {
-            "id": ecdh_public_key
+            "id": eddsa_public_key
         },
         "keys": {}
     }
@@ -44,7 +44,7 @@ const IdentityTableRow = ({node}: { node: string }) => {
     }
 
     const handleCopyClick = () => {
-        copyTextToClipboard(ecdh_public_key)
+        copyTextToClipboard(eddsa_public_key)
             .then(() => {
                 // If successful, update the isCopied state value
                 setIsCopied(true);
@@ -58,7 +58,7 @@ const IdentityTableRow = ({node}: { node: string }) => {
         <tr>
             <td><PingChecker uid={node}/></td>
             <td className="min-w-30">
-                <div className="tooltip w-full h-full whitespace-normal break-words" data-tip={ecdh_public_key}>
+                <div className="tooltip w-full h-full whitespace-normal break-words" data-tip={eddsa_public_key}>
                     <a className="mr-2 bold flex flex-col">
                         <div className="grid grid-cols-12 w-24 md:w-full">
                             <button
@@ -67,7 +67,7 @@ const IdentityTableRow = ({node}: { node: string }) => {
                                 {copyIcon}
                             </button>
                             <label htmlFor="my-modal" className="col-span-11 mt-3 cursor-pointer hidden md:block">
-                                {ecdh_public_key.slice(0, 61)}...</label>
+                                {eddsa_public_key.slice(0, 61)}...</label>
                             <label htmlFor="my-modal" className="col-span-11  md:hidden mt-3 cursor-pointer w-full btn btn-primary btn-xs">
                                 resolve</label>
                             <input type="checkbox" id="my-modal" className="modal-toggle" onInput={didPost}/>
