@@ -19,12 +19,14 @@ jobs:
             IdentityFile ~/.ssh/staging.key
             IdentitiesOnly yes
             StrictHostKeyChecking no
+            Port $SSH_PORT
             compression yes
           END
         env:
           SSH_USER: ${{ secrets.SSH_USER }}
           SSH_KEY: ${{ secrets.SSH_KEY }}
           SSH_HOST: ${{ secrets.SSH_HOST }}
+          SSH_PORT: ${{ secrets.SSH_PORT }}
 
       - name: Check out the source
         run: ssh deploy 'cd SoO-Dashboard && git pull'
